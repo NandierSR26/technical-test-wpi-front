@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Home } from './pages'
+import { Home, Product } from './pages'
 import { useAppDispatch } from './hooks/useReduxFunctions'
 import { startGetProducts } from './store/products/thunks'
 
@@ -15,6 +15,7 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='/product/:id' element={<Product />} />
     </Routes>
   )
 }

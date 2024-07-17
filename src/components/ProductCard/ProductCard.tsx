@@ -29,8 +29,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <p className="paragraph text-gray-500">{product.description.substring(0, 100) + ' ...'}</p>
 
         <button 
-          className={style['card-button']}
-          onClick={() => navigate(`/product/:${product.id}`)}
+          className={'card-button'}
+          onClick={() => navigate(`/product/${product.id}`)}
         >
           Ver más
         </button>

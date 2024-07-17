@@ -20,3 +20,14 @@ body {
   font-size: 18px;
 }
 
+.card-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2d70d4;
+  color: #fff;
+  border-radius: 25px;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+

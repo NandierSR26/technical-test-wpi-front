@@ -1,0 +1,14 @@
+main {
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.main-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-info {
+  padding: 20px;
+}
