@@ -6,10 +6,11 @@ import Transactions from "./transactions";
 
 export const api = () => {
   const axiosConfig = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: import.meta.env.VITE_API_URL_DEV,
     headers: {
       "Cache-Control": "no-cache",
       "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json"
     },
     timeout: 45000,
   });
