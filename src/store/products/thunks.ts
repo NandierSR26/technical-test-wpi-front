@@ -12,6 +12,7 @@ export const startGetProducts = () => {
       dispatch( onFetching(true) )
       await products.seed()
       const { data } = await products.findAll();
+      console.log({data})
       dispatch( onGetProducts(data) )
     } catch (error) {
       console.log(error);

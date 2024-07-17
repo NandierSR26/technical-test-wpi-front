@@ -7,3 +7,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  font-family: 'Montserrat', sans-serif;;
+}
+
+.paragraph {
+  font-size: 12px;
+}
+
+.subtitle {
+  font-size: 18px;
+}
+
