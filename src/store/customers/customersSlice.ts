@@ -15,6 +15,7 @@ export const customersSlice = createSlice({
   reducers: {
     onSaveCustomer: (state, {payload}:PayloadAction<ICustomerDataRequest>) => {
       state.currentCustomer = payload;
+      state.isFetching = false
     },
     onFetching: (state, { payload }:PayloadAction<boolean>) => {
       state.isFetching = payload;

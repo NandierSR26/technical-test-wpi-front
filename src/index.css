@@ -9,7 +9,8 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
 }
 
 .paragraph {
@@ -29,5 +30,31 @@ body {
   margin-top: 10px;
   font-size: 15px;
   font-weight: 600;
+}
+
+.form-container {
+  min-width: 100%;
+}
+
+.input-text {
+  padding: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 2px solid #525252;
+  border-radius: 12px;
+  outline: none;
+  flex-shrink: 0;
+  min-width: 0px;
+  margin-top: 10px;
+}
+
+.input-error {
+  border: 2px solid rgb(251, 63, 63);
+}
+
+.label-input-error {
+  font-family: 8px;
+  color: rgb(251, 63, 63);
+  margin-bottom: 10px;
 }
 

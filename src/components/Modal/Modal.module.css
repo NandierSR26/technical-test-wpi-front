@@ -1,0 +1,46 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding: 10px;
+  background-color: #cecdcda1;
+  backdrop-filter: blur(3px);
+  overflow: hidden;
+  transition: all .5s;
+}
+
+.modal-backdrop-hidden {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding: 10px;
+  background-color: #cecdcda1;
+  backdrop-filter: blur(3px);
+  overflow: hidden;
+  transition: all .5s;
+}
+
+.modal-container {
+  display: flex;
+  gap: 10px;
+  overflow-x: hidden;
+  background-color: #fff;
+  border-radius: 25px;
+  padding: 30px 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.next-back-button {
+  background-color: #fff;
+}

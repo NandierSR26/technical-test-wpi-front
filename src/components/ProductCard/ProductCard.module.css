@@ -1,6 +1,7 @@
 .product-card-container {
   width: auto;
   height: fit-content;
+  min-height: 560px;
   overflow: hidden;
   border-radius: 12px;
   background-color: #eee;
@@ -9,4 +10,10 @@
 
 .card-body {
   padding: 20px;
+}
+
+.card-image img {
+  object-fit: cover;
+  min-height: 400px;
+  aspect-ratio: 7/6;
 }
