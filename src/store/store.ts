@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { customersSlice } from "./customers/customersSlice";
-import { transactionsSlice } from "./transactions/transactionsslice";
+import { transactionsSlice } from "./transactions/transactionsSlice";
 
 export const store = configureStore({
   reducer: {
