@@ -1,0 +1,23 @@
+.header {
+  padding: 30px 20px;
+  border-bottom: 2px solid #eee;
+}
+
+.header-container {
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.logo {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.logo i {
+  font-size: 20px;
+}
+
+.logo-text {
+  margin-left: 10px;
+  font-size: 20px;
+}
