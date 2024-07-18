@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 
 import * as Yup from 'yup'
 import { ShippingAddress } from '../../../interfaces'
-import { onCloseModal, onOpenBackdrop, onSetForm2 } from '../../../store/ui/uiSlice'
+import { onCloseModal, onHideForms, onOpenBackdrop, onSetForm2 } from '../../../store/ui/uiSlice'
 import { onModelingTransactionData } from '../../../store/transactions/transactionsSlice'
 import { onAddOrderDetails, onAddOrderFormData } from '../../../store/orders/ordersSlice'
 import { store } from '../../../store'
@@ -65,7 +65,7 @@ export const Form3 = () => {
           const productPrice = (+units * product!.price) * 4000
           const tax = productPrice * 0.05
           const shipping = productPrice * 0.05
-          const subtotal = (productPrice + shipping + tax)*100
+          const subtotal = (productPrice + shipping + tax)
 
           dispatch(onModelingTransactionData({
             shipping_address: transactionData,
@@ -82,7 +82,7 @@ export const Form3 = () => {
             region: data.region,
             city: data.city,
             postal_code: data.postal_code,
-            total: subtotal.toString(),
+            total: (subtotal*100).toString(),
             product_amount: data.units,
             customer: currentCustomer!.id,
             product: product!.id
@@ -96,6 +96,7 @@ export const Form3 = () => {
           }))
 
           dispatch(onOpenBackdrop())
+          dispatch(onHideForms())
         }}
       >
         {({ values, touched, errors, handleChange, handleSubmit }) => (

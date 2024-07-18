@@ -1,34 +1,3 @@
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  padding: 10px;
-  background-color: #cecdcda1;
-  backdrop-filter: blur(3px);
-  overflow: hidden;
-  transition: all .5s;
-}
-
-.modal-backdrop-hidden {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  padding: 10px;
-  background-color: #cecdcda1;
-  backdrop-filter: blur(3px);
-  overflow: hidden;
-  transition: all .5s;
-}
 
 .resume-container {
   position: absolute;
@@ -40,12 +9,14 @@
   gap: 10px;
   overflow-x: hidden;
   background-color: #fff;
-  border-radius: 25px;
+  border-radius: 25px 25px 0 0;
   padding: 30px 20px;
   width: 100%;
-  max-width: 1000px;
-  height: 0;
   transition: all .5s ease-in-out;
+}
+
+.resume-container > div {
+  min-height: 100%;
 }
 
 .resume-open {

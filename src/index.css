@@ -58,3 +58,9 @@ body {
   /* margin-bottom: 10px; */
 }
 
+@media screen and (width > 800px ) {
+  .card-button-product {
+    width: fit-content;
+    padding: 10px 40px;
+  }
+}

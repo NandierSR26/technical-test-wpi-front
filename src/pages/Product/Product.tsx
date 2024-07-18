@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
-import style from './Product.module.css'
 import { BackdropResume, Form1, Form2, Form3, Header, Loader, TransactionModal } from '../../components'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxFunctions'
 import { startGetProductById } from '../../store/products/thunks'
 import { onOpenModal } from '../../store/ui/uiSlice'
+
+import style from './Product.module.css'
 
 export const Product = () => {
 
@@ -17,7 +18,7 @@ export const Product = () => {
 
   useEffect(() => {
     dispatch(startGetProductById(id!))
-  }, [id])
+  }, [])
 
   const handlePayWithCard = () => {
     dispatch(onOpenModal())
@@ -30,8 +31,8 @@ export const Product = () => {
       <Header />
 
       <main>
-        <section className="style['main-page-container']">
-          <figure>
+        <section className={style['main-page-container']}>
+          <figure className={style['product-image']}>
             <img
               src={import.meta.env.VITE_API_URL_DEV + '/assets/' + product.image}
               alt="product-image"
@@ -40,7 +41,7 @@ export const Product = () => {
 
           <div className={style['product-info']}>
             <h4 className="subtitle font-semibold text-gray-800 mb-3">{product.name}</h4>
-            <p className="paragraph text-gray-500 mb-3">{product.description}</p>
+            <p className="paragraph text-gray-500 mb-3 md:max-w-[50%]">{product.description}</p>
             <p className="paragraph mb-3">
               <span className="font-semibold">Price: </span>
               {product.price * 4000}
@@ -51,7 +52,7 @@ export const Product = () => {
               {product.stock}
             </p>
 
-            <button className="card-button" onClick={handlePayWithCard}>
+            <button className="card-button card-button-product" onClick={handlePayWithCard}>
               <span className='mr-3'>Pay with card</span>
               <i className="fa-solid fa-credit-card"></i>
             </button>

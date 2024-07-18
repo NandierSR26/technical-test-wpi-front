@@ -9,7 +9,7 @@ interface InitialState {
 }
 
 export const uiSlice = createSlice({
-  name: 'ui',
+  name: "ui",
   initialState: {
     modalIsOpen: false,
     backdropIsOpen: false,
@@ -19,16 +19,16 @@ export const uiSlice = createSlice({
   } as InitialState,
   reducers: {
     onOpenModal: (state) => {
-      state.modalIsOpen = true
+      state.modalIsOpen = true;
     },
     onCloseModal: (state) => {
-      state.modalIsOpen = false
+      state.modalIsOpen = false;
     },
     onOpenBackdrop: (state) => {
-      state.backdropIsOpen = true
+      state.backdropIsOpen = true;
     },
     onCloseBackdrop: (state) => {
-      state.backdropIsOpen = false
+      state.backdropIsOpen = false;
     },
     onSetForm1: (state) => {
       state.form1Visible = true;
@@ -45,11 +45,26 @@ export const uiSlice = createSlice({
       state.form2Visible = false;
       state.form3Visible = true;
     },
+    onHideForms: (state) => {
+      state.form1Visible = false;
+      state.form2Visible = false;
+      state.form3Visible = false;
+    },
     onHideFloatingElements: (state) => {
-      state.backdropIsOpen = false
-      state.modalIsOpen = false
-    }
-  }
-})
+      state.backdropIsOpen = false;
+      state.modalIsOpen = false;
+    },
+  },
+});
 
-export const { onCloseBackdrop, onCloseModal, onOpenBackdrop, onOpenModal, onSetForm1, onSetForm2, onSetForm3, onHideFloatingElements } = uiSlice.actions
+export const {
+  onCloseBackdrop,
+  onCloseModal,
+  onOpenBackdrop,
+  onOpenModal,
+  onSetForm1,
+  onSetForm2,
+  onSetForm3,
+  onHideFloatingElements,
+  onHideForms
+} = uiSlice.actions;
