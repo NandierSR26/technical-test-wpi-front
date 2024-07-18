@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import style from './Product.module.css'
-import { BackdropResume, Form1, Form2, Form3, Header, TransactionModal } from '../../components'
+import { BackdropResume, Form1, Form2, Form3, Header, Loader, TransactionModal } from '../../components'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxFunctions'
 import { startGetProductById } from '../../store/products/thunks'
@@ -8,7 +8,6 @@ import { onOpenModal } from '../../store/ui/uiSlice'
 
 export const Product = () => {
 
-  const navigate = useNavigate();
   const { id } = useParams()
   const dispatch = useAppDispatch();
   const { isFetching: isFetchingProducts, product } = useAppSelector(state => state.products)
@@ -24,7 +23,7 @@ export const Product = () => {
     dispatch(onOpenModal())
   }
 
-  if (isFetchingProducts || !product || isFetchingTransactions) return <h1>Cargando ...</h1>
+  if (isFetchingProducts || !product || isFetchingTransactions) return <Loader />
 
   return (
     <div className="relative">

@@ -1,12 +1,12 @@
 import React from 'react'
-import { Header, ProductsGrid } from '../../components';
+import { Header, Loader, ProductsGrid } from '../../components';
 import { useAppSelector } from '../../hooks/useReduxFunctions';
 
 export const Home = () => {
   
   const { isFetching, products } = useAppSelector(state => state.products)
 
-  if(isFetching || !products) return <h1>Cargando...</h1>
+  if(isFetching || !products) return <Loader />
 
   return (
     <div>
