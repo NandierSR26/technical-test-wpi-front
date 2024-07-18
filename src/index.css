@@ -45,16 +45,16 @@ body {
   outline: none;
   flex-shrink: 0;
   min-width: 0px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .input-error {
-  border: 2px solid rgb(251, 63, 63);
+  border: 2px solid #fb3f3f;
 }
 
 .label-input-error {
   font-family: 8px;
   color: rgb(251, 63, 63);
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 

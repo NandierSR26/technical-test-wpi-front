@@ -4,7 +4,7 @@ import { CustomerData, ICardTokenizeRequest, ITransactionDataRequest, PaymentMet
 
 interface InitialState {
   isFetching: boolean;
-  tokenizeCardData: ICardTokenizeRequest | null;
+  tokenizeCardData: string;
   transactionData: ITransactionDataRequest;
 }
 
@@ -47,27 +47,27 @@ export const transactionsSlice = createSlice({
   name: "transactions",
   initialState: {
     isFetching: false,
-    tokenizeCardData: null,
+    tokenizeCardData: '',
     transactionData: transactionDataInit,
   } as InitialState,
   reducers: {
-    onModelingTransactionData: (state, { payload }: PayloadAction<ITransactionDataRequest>) => {
-      state.transactionData = payload
+    onModelingTransactionData: (state, { payload }: PayloadAction<Partial<ITransactionDataRequest>>) => {
+      state.transactionData = {...state.transactionData, ...payload}
       state.isFetching = false
     },
-    onTokenizrCard: (state, { payload }: PayloadAction<ICardTokenizeRequest>) => {
+    onTokenizeCard: (state, { payload }: PayloadAction<string>) => {
       state.tokenizeCardData = payload
       state.isFetching = false
     },
-    onIsFetching: (state, { payload }: PayloadAction<boolean>) => {
+    onFetching: (state, { payload }: PayloadAction<boolean>) => {
       state.isFetching = payload
     },
     onClear: (state) => {
       state.isFetching = false,
-      state.tokenizeCardData = null,
+      state.tokenizeCardData = '',
       state.transactionData = transactionDataInit
     }
   },
 });
 
-export const {} = transactionsSlice.actions;
+export const { onClear, onFetching, onModelingTransactionData, onTokenizeCard } = transactionsSlice.actions;

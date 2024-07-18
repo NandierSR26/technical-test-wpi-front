@@ -19,7 +19,6 @@ export const Product = () => {
   }, [id])
 
   const handlePayWithCard = () => {
-    navigate(`/product/${product!.id}/?form=1`)
     dispatch(onOpenModal())
   }
 

@@ -1,9 +1,9 @@
 import { AxiosInstance } from "axios";
-import { ICardTokenizeRequest, ITransactionDataRequest } from "../../interfaces";
+import { ICardTokenizeRequest, ICardTokenizeResponse, ITransactionDataRequest } from "../../interfaces";
 
 export default function Action(api: AxiosInstance) {
   return {
-    tokenize: (data: ICardTokenizeRequest) => api.post('/token-card', data),
+    tokenize: (data: ICardTokenizeRequest) => api.post<ICardTokenizeResponse>('/transactions/token-card', data),
     create: (data: ITransactionDataRequest) => api.post('transactions', data)
   }
 }
