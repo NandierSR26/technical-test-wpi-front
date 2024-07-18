@@ -4,9 +4,9 @@ import { Formik } from 'formik'
 
 import * as Yup from 'yup'
 import { ShippingAddress } from '../../../interfaces'
-import { onSetForm2 } from '../../../store/ui/uiSlice'
+import { onCloseModal, onOpenBackdrop, onSetForm2 } from '../../../store/ui/uiSlice'
 import { onModelingTransactionData } from '../../../store/transactions/transactionsSlice'
-import { onAddOrderFormData } from '../../../store/orders/ordersSlice'
+import { onAddOrderDetails, onAddOrderFormData } from '../../../store/orders/ordersSlice'
 import { store } from '../../../store'
 
 export const Form3 = () => {
@@ -62,16 +62,17 @@ export const Form3 = () => {
 
           const { units, ...shippingAddress } = data
           const transactionData: ShippingAddress = shippingAddress;
-          const productTotal = (+units * product!.price) * 4000
-          const taxes = productTotal * 0.05
-          const shipping = productTotal * 0.05
-          const subTotal = (productTotal + shipping + taxes)*100
+          const productPrice = (+units * product!.price) * 4000
+          const tax = productPrice * 0.05
+          const shipping = productPrice * 0.05
+          const subtotal = (productPrice + shipping + tax)*100
 
           dispatch(onModelingTransactionData({
             shipping_address: transactionData,
-            amount_in_cents: subTotal,
+            amount_in_cents: subtotal,
             currency: 'COP',
-            redirect_url: ''
+            redirect_url: `http://localhost:5173/product/${ product?.id }`,
+            reference: `${currentCustomer?.full_name}_${product?.name}_${Date.now()}`
           }))
 
           dispatch(onAddOrderFormData({
@@ -81,11 +82,20 @@ export const Form3 = () => {
             region: data.region,
             city: data.city,
             postal_code: data.postal_code,
-            total: subTotal.toString(),
+            total: subtotal.toString(),
             product_amount: data.units,
             customer: currentCustomer!.id,
             product: product!.id
           }))
+
+          dispatch(onAddOrderDetails({
+            productPrice,
+            tax,
+            shipping,
+            subtotal
+          }))
+
+          dispatch(onOpenBackdrop())
         }}
       >
         {({ values, touched, errors, handleChange, handleSubmit }) => (

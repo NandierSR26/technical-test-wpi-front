@@ -1,11 +1,12 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CustomerData, ICardTokenizeRequest, ITransactionDataRequest, PaymentMethod, ShippingAddress } from "../../interfaces";
+import { CustomerData, ITransactionDataRequest, ITransactionDataResponse, PaymentMethod, ShippingAddress } from "../../interfaces";
 
 interface InitialState {
   isFetching: boolean;
   tokenizeCardData: string;
   transactionData: ITransactionDataRequest;
+  newTransaction: ITransactionDataResponse | null
 }
 
 export const paymentMethodInit: PaymentMethod = {
@@ -39,6 +40,7 @@ export const transactionDataInit: ITransactionDataRequest = {
   customer_email: "",
   payment_method: paymentMethodInit,
   redirect_url: "",
+  reference: "",
   customer_data: customerDataInit,
   shipping_address: shippingAddressInit,
 };
@@ -49,8 +51,13 @@ export const transactionsSlice = createSlice({
     isFetching: false,
     tokenizeCardData: '',
     transactionData: transactionDataInit,
+    newTransaction: null
   } as InitialState,
   reducers: {
+    onNewTransaction: (state, { payload }: PayloadAction<ITransactionDataResponse>) => {
+      state.newTransaction = payload
+      state.isFetching = false
+    },
     onModelingTransactionData: (state, { payload }: PayloadAction<Partial<ITransactionDataRequest>>) => {
       state.transactionData = {...state.transactionData, ...payload}
       state.isFetching = false
@@ -70,4 +77,4 @@ export const transactionsSlice = createSlice({
   },
 });
 
-export const { onClear, onFetching, onModelingTransactionData, onTokenizeCard } = transactionsSlice.actions;
+export const { onClear, onFetching, onModelingTransactionData, onTokenizeCard, onNewTransaction } = transactionsSlice.actions;

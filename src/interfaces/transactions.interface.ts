@@ -2,13 +2,22 @@ export interface ITransactionDataRequest {
   acceptance_token?: string;
   amount_in_cents:  number;
   currency:         string;
-  signature:        string;
+  signature?:        string;
   customer_email:   string;
   payment_method:   PaymentMethod;
   redirect_url:     string;
-  reference?:        string;
+  reference:        string;
   customer_data:    CustomerData;
   shipping_address: ShippingAddress;
+}
+
+export interface ITransactionDataResponse {
+  id:                  string;
+  amount_in_cents:     number;
+  created_at:          Date;
+  customer_email:      string;
+  payment_method_type: string;
+  status:              string;
 }
 
 export interface ICardTokenizeRequest {

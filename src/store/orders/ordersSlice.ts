@@ -1,10 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IOrderDataRequest, IOrderDataResponse } from "../../interfaces/orders.interface";
 
+export interface ResumeDetails {
+  productPrice: number;
+  tax: number;
+  shipping: number;
+  subtotal: number;
+}
+
 interface InitialState {
   isFetching: boolean;
   order: IOrderDataResponse | null,
-  orderFormData: IOrderDataRequest
+  orderFormData: IOrderDataRequest,
+  orderDetails: ResumeDetails
 }
 
 const orderFormData: IOrderDataRequest = {
@@ -26,9 +34,13 @@ export const ordersSclice = createSlice({
   initialState: {
     isFetching: false,
     order: null,
-    orderFormData
+    orderFormData,
+    orderDetails: {}
   } as InitialState,
   reducers: {
+    onAddOrderDetails: (state, {payload}: PayloadAction<ResumeDetails>) => {
+      state.orderDetails = payload
+    },
     onAddOrderFormData: (state, {payload}: PayloadAction<Partial<IOrderDataRequest>>) => {
       state.orderFormData = { ...state.orderFormData, ...payload }
     },
@@ -46,4 +58,4 @@ export const ordersSclice = createSlice({
   }
 })
 
-export const { onNewOrder, onFetching, clear, onAddOrderFormData } = ordersSclice.actions
+export const { onNewOrder, onFetching, clear, onAddOrderFormData, onAddOrderDetails } = ordersSclice.actions

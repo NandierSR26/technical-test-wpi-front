@@ -44,8 +44,12 @@ export const uiSlice = createSlice({
       state.form1Visible = false;
       state.form2Visible = false;
       state.form3Visible = true;
+    },
+    onHideFloatingElements: (state) => {
+      state.backdropIsOpen = false
+      state.modalIsOpen = false
     }
   }
 })
 
-export const { onCloseBackdrop, onCloseModal, onOpenBackdrop, onOpenModal, onSetForm1, onSetForm2, onSetForm3 } = uiSlice.actions
+export const { onCloseBackdrop, onCloseModal, onOpenBackdrop, onOpenModal, onSetForm1, onSetForm2, onSetForm3, onHideFloatingElements } = uiSlice.actions
