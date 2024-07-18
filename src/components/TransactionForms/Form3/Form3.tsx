@@ -5,14 +5,19 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { ShippingAddress } from '../../../interfaces'
 import { onSetForm2 } from '../../../store/ui/uiSlice'
+import { onModelingTransactionData } from '../../../store/transactions/transactionsSlice'
+import { onAddOrderFormData } from '../../../store/orders/ordersSlice'
+import { store } from '../../../store'
 
 export const Form3 = () => {
   const dispatch = useAppDispatch()
   const { isFetching: isFetchingTransactions } = useAppSelector(state => state.transactions)
   const { currentCustomer } = useAppSelector(state => state.customers)
+  const { product } = useAppSelector(state => state.products)
 
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [initialValues, setInitialValues] = useState<ShippingAddress>({
+  const [initialValues, setInitialValues] = useState({
+    units: '',
     address_line_1: '',
     address_line_2: '',
     country: '',
@@ -44,21 +49,57 @@ export const Form3 = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={Yup.object({
+          units: Yup.number().max(product!.stock, `There are only ${product?.stock} units in stock`).required('required'),
           address_line_1: Yup.string().required('Required'),
           address_line_2: Yup.string().required('Required'),
           country: Yup.string().required('Required'),
           region: Yup.string().required('Required'),
           city: Yup.string().required('Required'),
-          name: Yup.string().required('Required'),
-          phone_number: Yup.string().required('Required'),
           postal_code: Yup.string().required('Required'),
         })}
         onSubmit={(data) => {
-          console.log(data)
+          localStorage.setItem('shipping-address', JSON.stringify(data))
+
+          const { units, ...shippingAddress } = data
+          const transactionData: ShippingAddress = shippingAddress;
+          const productTotal = (+units * product!.price) * 4000
+          const taxes = productTotal * 0.05
+          const shipping = productTotal * 0.05
+          const subTotal = (productTotal + shipping + taxes)*100
+
+          dispatch(onModelingTransactionData({
+            shipping_address: transactionData,
+            amount_in_cents: subTotal,
+            currency: 'COP',
+            redirect_url: ''
+          }))
+
+          dispatch(onAddOrderFormData({
+            address_line_1: data.address_line_1,
+            address_line_2: data.address_line_2,
+            country: data.country,
+            region: data.region,
+            city: data.city,
+            postal_code: data.postal_code,
+            total: subTotal.toString(),
+            product_amount: data.units,
+            customer: currentCustomer!.id,
+            product: product!.id
+          }))
         }}
       >
         {({ values, touched, errors, handleChange, handleSubmit }) => (
           <form className="flex flex-col mx-auto max-w-sm" onSubmit={handleSubmit}>
+            <input
+              type="number"
+              name="units"
+              placeholder="Product units"
+              onChange={handleChange}
+              value={values.units}
+              className={errors.units && touched.units ? 'input-text input-error' : 'input-text'}
+            />
+            {(errors.units && touched.units) && <span className="label-input-error">{errors.units}</span>}
+
             <input
               type="text"
               name="address_line_1"

@@ -115,7 +115,7 @@ export const Form2 = () => {
               placeholder="Card holder"
               onChange={handleChange}
               value={values.card_holder}
-              className={errors.card_holder && touched.card_holder ? 'input-text input-error !w-[50px]' : 'input-text !w-[50px]'}
+              className={errors.card_holder && touched.card_holder ? 'input-text input-error' : 'input-text'}
             />
             {(errors.card_holder && touched.card_holder) && <span className="label-input-error">{errors.card_holder}</span>}
 

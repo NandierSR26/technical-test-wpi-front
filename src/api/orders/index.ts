@@ -1,8 +1,8 @@
 import { AxiosInstance } from "axios";
-import { IOrderDataRequest } from "../../interfaces/orders.interface";
+import { IOrderDataRequest, IOrderDataResponse } from "../../interfaces/orders.interface";
 
 export default function Action(api: AxiosInstance) {
   return {
-    create: (data: IOrderDataRequest) => api.post('/orders', data)
+    create: (data: IOrderDataRequest) => api.post<IOrderDataResponse>('/orders', data)
   }
 }

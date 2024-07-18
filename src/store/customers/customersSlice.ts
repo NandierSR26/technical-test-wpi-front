@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICustomerDataRequest } from "../../interfaces";
+import { ICustomerDataResponse } from "../../interfaces";
 
 interface InitialState {
   isFetching: boolean,
-  currentCustomer: ICustomerDataRequest | null
+  currentCustomer: ICustomerDataResponse | null
 }
 
 export const customersSlice = createSlice({
@@ -13,7 +13,7 @@ export const customersSlice = createSlice({
     currentCustomer: null
   } as InitialState,
   reducers: {
-    onSaveCustomer: (state, {payload}:PayloadAction<ICustomerDataRequest>) => {
+    onSaveCustomer: (state, {payload}:PayloadAction<ICustomerDataResponse>) => {
       state.currentCustomer = payload;
       state.isFetching = false
     },
